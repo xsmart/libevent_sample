@@ -449,7 +449,7 @@ Copyright (C) 2010 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/opt/libevent_sample/timer/libevent-2.0.20-stable'
+ac_pwd='/opt/libevent_sample/libevent-2.0.20-stable'
 srcdir='.'
 INSTALL='/usr/bin/install -c'
 MKDIR_P='/bin/mkdir -p'
@@ -687,7 +687,7 @@ finish_cmds='PATH="\$PATH:/sbin" ldconfig -n $libdir'
 finish_eval=''
 hardcode_into_libs='yes'
 sys_lib_search_path_spec='/usr/lib/gcc/i686-linux-gnu/4.8 /usr/lib/i386-linux-gnu /usr/lib /lib/i386-linux-gnu /lib '
-sys_lib_dlsearch_path_spec='/lib64 /usr/lib64 /lib /usr/lib /usr/lib/i386-linux-gnu/libfakeroot /usr/lib/i386-linux-gnu/mesa-egl /usr/lib/i386-linux-gnu/mesa /lib/i386-linux-gnu /usr/lib/i386-linux-gnu /lib/i686-linux-gnu /usr/lib/i686-linux-gnu /usr/local/lib '
+sys_lib_dlsearch_path_spec='/lib64 /usr/lib64 /lib /usr/lib /usr/lib/i386-linux-gnu/libfakeroot /usr/lib/i386-linux-gnu/mesa-egl /usr/lib/i386-linux-gnu/mesa /lib/i386-linux-gnu /usr/lib/i386-linux-gnu /lib/i686-linux-gnu /usr/lib/i686-linux-gnu /usr/local/lib /usr/local/lib '
 hardcode_action='immediate'
 enable_dlopen='unknown'
 enable_dlopen_self='unknown'
@@ -933,12 +933,12 @@ S["mkdir_p"]="/bin/mkdir -p"
 S["MKDIR_P"]="/bin/mkdir -p"
 S["INSTALL_STRIP_PROGRAM"]="$(install_sh) -c -s"
 S["STRIP"]="strip"
-S["install_sh"]="${SHELL} /opt/libevent_sample/timer/libevent-2.0.20-stable/install-sh"
-S["MAKEINFO"]="${SHELL} /opt/libevent_sample/timer/libevent-2.0.20-stable/missing --run makeinfo"
-S["AUTOHEADER"]="${SHELL} /opt/libevent_sample/timer/libevent-2.0.20-stable/missing --run autoheader"
-S["AUTOMAKE"]="${SHELL} /opt/libevent_sample/timer/libevent-2.0.20-stable/missing --run automake-1.11"
-S["AUTOCONF"]="${SHELL} /opt/libevent_sample/timer/libevent-2.0.20-stable/missing --run autoconf"
-S["ACLOCAL"]="${SHELL} /opt/libevent_sample/timer/libevent-2.0.20-stable/missing --run aclocal-1.11"
+S["install_sh"]="${SHELL} /opt/libevent_sample/libevent-2.0.20-stable/install-sh"
+S["MAKEINFO"]="${SHELL} /opt/libevent_sample/libevent-2.0.20-stable/missing --run makeinfo"
+S["AUTOHEADER"]="${SHELL} /opt/libevent_sample/libevent-2.0.20-stable/missing --run autoheader"
+S["AUTOMAKE"]="${SHELL} /opt/libevent_sample/libevent-2.0.20-stable/missing --run automake-1.11"
+S["AUTOCONF"]="${SHELL} /opt/libevent_sample/libevent-2.0.20-stable/missing --run autoconf"
+S["ACLOCAL"]="${SHELL} /opt/libevent_sample/libevent-2.0.20-stable/missing --run aclocal-1.11"
 S["VERSION"]="2.0.20-stable"
 S["PACKAGE"]="libevent"
 S["CYGPATH_W"]="echo"

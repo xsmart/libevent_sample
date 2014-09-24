@@ -674,8 +674,8 @@ configure:12395: checking for openssl/bio.h
 configure:12395: result: no
 configure:12411: checking for library containing SSL_new
 configure:12442: gcc -o conftest -g -O2 -Wall -fno-strict-aliasing   conftest.c  >&5
-/tmp/cccqlz4h.o: In function `main':
-/opt/libevent_sample/timer/libevent-2.0.20-stable/conftest.c:35: undefined reference to `SSL_new'
+/tmp/ccxV4tZw.o: In function `main':
+/opt/libevent_sample/libevent-2.0.20-stable/conftest.c:35: undefined reference to `SSL_new'
 collect2: error: ld returned 1 exit status
 configure:12442: $? = 1
 configure: failed program was:
@@ -1633,8 +1633,8 @@ configure:13084: $? = 0
 configure:13084: result: yes
 configure:13084: checking for strlcpy
 configure:13084: gcc -o conftest -g -O2 -Wall -fno-strict-aliasing   conftest.c  >&5
-/tmp/cc42S7cb.o: In function `main':
-/opt/libevent_sample/timer/libevent-2.0.20-stable/conftest.c:100: undefined reference to `strlcpy'
+/tmp/ccj3yIeH.o: In function `main':
+/opt/libevent_sample/libevent-2.0.20-stable/conftest.c:100: undefined reference to `strlcpy'
 collect2: error: ld returned 1 exit status
 configure:13084: $? = 1
 configure: failed program was:
@@ -1788,8 +1788,8 @@ configure:13084: $? = 0
 configure:13084: result: yes
 configure:13084: checking for arc4random
 configure:13084: gcc -o conftest -g -O2 -Wall -fno-strict-aliasing   conftest.c  >&5
-/tmp/ccl4XaQm.o: In function `main':
-/opt/libevent_sample/timer/libevent-2.0.20-stable/conftest.c:111: undefined reference to `arc4random'
+/tmp/ccwNfmnR.o: In function `main':
+/opt/libevent_sample/libevent-2.0.20-stable/conftest.c:111: undefined reference to `arc4random'
 collect2: error: ld returned 1 exit status
 configure:13084: $? = 1
 configure: failed program was:
@@ -1910,8 +1910,8 @@ configure: failed program was:
 configure:13084: result: no
 configure:13084: checking for arc4random_buf
 configure:13084: gcc -o conftest -g -O2 -Wall -fno-strict-aliasing   conftest.c  >&5
-/tmp/ccslBpSu.o: In function `main':
-/opt/libevent_sample/timer/libevent-2.0.20-stable/conftest.c:111: undefined reference to `arc4random_buf'
+/tmp/ccnaodhZ.o: In function `main':
+/opt/libevent_sample/libevent-2.0.20-stable/conftest.c:111: undefined reference to `arc4random_buf'
 collect2: error: ld returned 1 exit status
 configure:13084: $? = 1
 configure: failed program was:
@@ -2032,8 +2032,8 @@ configure: failed program was:
 configure:13084: result: no
 configure:13084: checking for issetugid
 configure:13084: gcc -o conftest -g -O2 -Wall -fno-strict-aliasing   conftest.c  >&5
-/tmp/ccc0AdZF.o: In function `main':
-/opt/libevent_sample/timer/libevent-2.0.20-stable/conftest.c:111: undefined reference to `issetugid'
+/tmp/ccVfYlR5.o: In function `main':
+/opt/libevent_sample/libevent-2.0.20-stable/conftest.c:111: undefined reference to `issetugid'
 collect2: error: ld returned 1 exit status
 configure:13084: $? = 1
 configure: failed program was:
@@ -2214,8 +2214,8 @@ configure:13503: $? = 0
 configure:13503: result: yes
 configure:13587: checking for port_create
 configure:13587: gcc -o conftest -g -O2 -Wall -fno-strict-aliasing   conftest.c  >&5
-/tmp/ccR8xcWj.o: In function `main':
-/opt/libevent_sample/timer/libevent-2.0.20-stable/conftest.c:126: undefined reference to `port_create'
+/tmp/ccMIo7So.o: In function `main':
+/opt/libevent_sample/libevent-2.0.20-stable/conftest.c:126: undefined reference to `port_create'
 collect2: error: ld returned 1 exit status
 configure:13587: $? = 1
 configure: failed program was:
@@ -5392,11 +5392,11 @@ conftest.c:118:22: warning: null argument where non-null required (argument 3) [
 conftest.c:116:27: warning: 'th' is used uninitialized in this function [-Wuninitialized]
  pthread_t th; pthread_join(th, 0);
                            ^
-/tmp/ccMZoMbb.o: In function `main':
-/opt/libevent_sample/timer/libevent-2.0.20-stable/conftest.c:116: undefined reference to `pthread_join'
-/opt/libevent_sample/timer/libevent-2.0.20-stable/conftest.c:117: undefined reference to `__pthread_register_cancel'
-/opt/libevent_sample/timer/libevent-2.0.20-stable/conftest.c:118: undefined reference to `pthread_create'
-/opt/libevent_sample/timer/libevent-2.0.20-stable/conftest.c:118: undefined reference to `__pthread_unregister_cancel'
+/tmp/ccT6lK6K.o: In function `main':
+/opt/libevent_sample/libevent-2.0.20-stable/conftest.c:116: undefined reference to `pthread_join'
+/opt/libevent_sample/libevent-2.0.20-stable/conftest.c:117: undefined reference to `__pthread_register_cancel'
+/opt/libevent_sample/libevent-2.0.20-stable/conftest.c:118: undefined reference to `pthread_create'
+/opt/libevent_sample/libevent-2.0.20-stable/conftest.c:118: undefined reference to `__pthread_unregister_cancel'
 collect2: error: ld returned 1 exit status
 configure:14604: $? = 1
 configure: failed program was:
@@ -5967,6 +5967,7 @@ config.status:1226: creating include/Makefile
 config.status:1226: creating test/Makefile
 config.status:1226: creating sample/Makefile
 config.status:1226: creating config.h
+config.status:1407: config.h is unchanged
 config.status:1455: executing depfiles commands
 config.status:1455: executing libtool commands
 
@@ -6159,15 +6160,15 @@ lt_cv_to_tool_file_cmd=func_convert_file_noop
 ## Output variables. ##
 ## ----------------- ##
 
-ACLOCAL='${SHELL} /opt/libevent_sample/timer/libevent-2.0.20-stable/missing --run aclocal-1.11'
+ACLOCAL='${SHELL} /opt/libevent_sample/libevent-2.0.20-stable/missing --run aclocal-1.11'
 AMDEPBACKSLASH='\'
 AMDEP_FALSE='#'
 AMDEP_TRUE=''
 AMTAR='$${TAR-tar}'
 AR='ar'
-AUTOCONF='${SHELL} /opt/libevent_sample/timer/libevent-2.0.20-stable/missing --run autoconf'
-AUTOHEADER='${SHELL} /opt/libevent_sample/timer/libevent-2.0.20-stable/missing --run autoheader'
-AUTOMAKE='${SHELL} /opt/libevent_sample/timer/libevent-2.0.20-stable/missing --run automake-1.11'
+AUTOCONF='${SHELL} /opt/libevent_sample/libevent-2.0.20-stable/missing --run autoconf'
+AUTOHEADER='${SHELL} /opt/libevent_sample/libevent-2.0.20-stable/missing --run autoheader'
+AUTOMAKE='${SHELL} /opt/libevent_sample/libevent-2.0.20-stable/missing --run automake-1.11'
 AWK='mawk'
 BUILD_CYGWIN_FALSE=''
 BUILD_CYGWIN_TRUE='#'
@@ -6221,7 +6222,7 @@ LIBTOOL_DEPS='./ltmain.sh'
 LIPO=''
 LN_S='ln -s'
 LTLIBOBJS=''
-MAKEINFO='${SHELL} /opt/libevent_sample/timer/libevent-2.0.20-stable/missing --run makeinfo'
+MAKEINFO='${SHELL} /opt/libevent_sample/libevent-2.0.20-stable/missing --run makeinfo'
 MANIFEST_TOOL=':'
 MKDIR_P='/bin/mkdir -p'
 NM='/usr/bin/nm -B'
@@ -6296,7 +6297,7 @@ host_vendor='pc'
 htmldir='${docdir}'
 includedir='${prefix}/include'
 infodir='${datarootdir}/info'
-install_sh='${SHELL} /opt/libevent_sample/timer/libevent-2.0.20-stable/install-sh'
+install_sh='${SHELL} /opt/libevent_sample/libevent-2.0.20-stable/install-sh'
 libdir='${exec_prefix}/lib'
 libexecdir='${exec_prefix}/libexec'
 localedir='${datarootdir}/locale'

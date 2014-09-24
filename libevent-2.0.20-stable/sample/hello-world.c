@@ -91,7 +91,7 @@ listener_cb(struct evconnlistener *listener, evutil_socket_t fd,
 {
 	struct event_base *base = user_data;
 	struct bufferevent *bev;
-
+	printf("listener_cb\n");
 	bev = bufferevent_socket_new(base, fd, BEV_OPT_CLOSE_ON_FREE);
 	if (!bev) {
 		fprintf(stderr, "Error constructing bufferevent!");
@@ -108,6 +108,7 @@ listener_cb(struct evconnlistener *listener, evutil_socket_t fd,
 static void
 conn_writecb(struct bufferevent *bev, void *user_data)
 {
+    printf("write_cb\n");
 	struct evbuffer *output = bufferevent_get_output(bev);
 	if (evbuffer_get_length(output) == 0) {
 		printf("flushed answer\n");
@@ -118,6 +119,7 @@ conn_writecb(struct bufferevent *bev, void *user_data)
 static void
 conn_eventcb(struct bufferevent *bev, short events, void *user_data)
 {
+    printf("event_cb\n");
 	if (events & BEV_EVENT_EOF) {
 		printf("Connection closed.\n");
 	} else if (events & BEV_EVENT_ERROR) {
@@ -132,6 +134,7 @@ conn_eventcb(struct bufferevent *bev, short events, void *user_data)
 static void
 signal_cb(evutil_socket_t sig, short events, void *user_data)
 {
+    printf("signal_cb\n");
 	struct event_base *base = user_data;
 	struct timeval delay = { 2, 0 };
 
