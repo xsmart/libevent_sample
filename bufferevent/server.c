@@ -8,7 +8,7 @@
 #include <arpa/inet.h>
 
 #define SVRADDR "127.0.0.1"
-#define PORT 7890
+#define PORT 8080
 
 /* copy from UNPv1e3 */
 ssize_t
