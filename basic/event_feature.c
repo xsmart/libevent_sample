@@ -1,53 +1,92 @@
-#include <event.h>
+#include <event2/event.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <assert.h>
 
-int pp[2];
-struct event *evw;
-struct event *evr;
 struct event_base *base;
+int pp[2];
 
 void
-read_cb(evutil_socket_t fd, short evtype, void *arg) {
-	printf("read_cb\n");
-	char buf[1024];
-	int ret = read(fd, buf, 1024);
-	buf[ret] = '\0';
-	printf("read == %s\n", buf);
+print_features (struct event_base *base)
+{
+	const char *method=event_base_get_method(base);
+    printf ("--- method <%s> ---\n", method);
+    
+	int cnt = event_base_get_features(base);
+    if (cnt & EV_FEATURE_ET) {
+        /* see man for more information about edge-triggered and level-triggered */
+        printf("support edge-triggered events with EV_ET\n");
+    }
+	if(cnt & EV_FEATURE_O1) {
+	    /* poll and select is O(n)  */
+		printf("having one event triggered among many is an O(1) operation.\n");
+	}
+	if(cnt & EV_FEATURE_FDS) {
+	    /* epoll not support it */
+		printf("allows file descriptors as well as sockets. \n");
+	}
+	if (cnt & EV_FEATURE_EARLY_CLOSE) {
+	    /* detect connection close without the necessity of reading all the pending data. */
+        printf ("EV_FEATURE_EARLY_CLOSE\n");
+	}
+	printf ("that is all\n\n");
+
 
 }
 
 void
-write_cb(evutil_socket_t fd, short evtype, void *arg) {
-	printf("write_cb\n");
+poll_feature_test()
+{
+    struct event_config *config = event_config_new();
+    event_config_avoid_method (config, "select");
+    event_config_avoid_method (config, "epoll");
 
-	static int num = 1;
-	if(num > 0) {
-		write(pp[1], "hello", 5);
-		num--;
-	}
+    struct event_base *base = event_base_new_with_config (config);
+    print_features(base);
+    event_base_free(base);
+}
+
+void
+select_feature_test()
+{
+    struct event_config *config = event_config_new();
+    event_config_avoid_method (config, "poll");
+    event_config_avoid_method (config, "epoll");
+
+    struct event_base *base = event_base_new_with_config (config);
+    print_features(base);
+    event_base_free(base);
+}
+
+void feature_test ()
+{
+    /* supported async */
+    const char ** methods = event_get_supported_methods(); 
+    if (methods) {
+        int i = 0;
+        while(methods[i]) {
+            printf ("method %d : <%s>\n", i+1, methods[i]);
+            i++;
+        }
+    }
+
+    /* get the default async method */
+	base = event_base_new();
+    const char * bb = event_base_get_method(base);
+    printf("default method is <%s>\n", bb);     /* epoll */
+
+	print_features(base);
+
+	event_base_free(base);
 }
 
 int
 main() {
+    feature_test();
+    poll_feature_test();
+    select_feature_test();
 	pipe(pp);
-	base = event_base_new();
-	char * bb = event_base_get_method(base);	/* Get the kernel event notification mechanism used by Libevent. */
-	printf("%s\n", bb);		/* epoll */
-	int cnt = event_base_get_features(base);
-
-	if(cnt & EV_FEATURE_O1) {
-		printf("having one event triggered among many is [approximately] an O(1) operation.\n");
-	}
-	if(cnt & EV_FEATURE_O1) {
-		printf("allows edge-triggered events with EV_ET");
-	}
-
-	if(cnt & EV_FEATURE_FDS) {
-		printf("allows file descriptors as well as sockets. \n");
-	}
 	return 0;
 }
 

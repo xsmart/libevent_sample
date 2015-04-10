@@ -54,8 +54,7 @@ main() {
         event_add(evw, NULL);
         event_add(evr, NULL);
 
-
-        event_base_dispatch(base);	/* The event_base_dispatch() call is the same as event_base_loop(), with no flags set. */
+        event_base_dispatch(base);
         printf("done\n");
         return 0;
 }

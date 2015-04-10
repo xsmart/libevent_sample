@@ -11,7 +11,7 @@
 #include <event2/buffer.h>
 
 #define SVRADDR "127.0.0.1"
-#define PORT 7890
+#define PORT 8080
 
 static void
 buff_input_cb (struct bufferevent *bev,
@@ -83,7 +83,7 @@ main ()
     bufferevent_setcb(p_event, buff_input_cb, NULL, buff_ev_cb, p_base);
     bufferevent_enable(p_event, EV_READ);
 
-    bufferevent_setwatermark(p_event, EV_READ, 20, 100);
+    bufferevent_setwatermark(p_event, EV_READ, 10, 100);
     event_base_dispatch(p_base);
 
     return 0;

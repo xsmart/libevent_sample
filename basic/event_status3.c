@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <event.h>
+#include <event2/event.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdbool.h>
@@ -57,10 +57,10 @@ main() {
         event_callback_fn cb = event_get_callback(evw);
         assert(write_cb == cb);
         assert(NULL == event_get_callback_arg(evw));
-        assert(5 == event_get_events(evw));
+
+        assert(EV_WRITE|EV_TIMEOUT == event_get_events(evw));
+
         assert(pp[1] == event_get_fd(evw));
-        strcmp("2.0.21-stable",event_get_version());
-        assert(0x2001500 == event_get_version_number());
         assert(event_initialized(evw) == 1);
         event_base_dispatch(base);
 
