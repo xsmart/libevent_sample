@@ -40,6 +40,37 @@ write_cb(evutil_socket_t fd, short evtype, void *arg) {
 
 }
 
+void
+cb_1 (evutil_socket_t fd, short events, void *arg)
+{
+    return;
+}
+
+void
+test_num_events()
+{
+    struct event_base *base = event_base_new();
+    struct event *ev = event_new (base, -1, EV_TIMEOUT, cb_1, NULL);
+
+    struct timeval tv = {1,0};
+    event_add(ev, &tv);
+    event_add(ev, &tv); /* added events == 1 */
+
+    /* only calculate the number of events we added */
+    int num = event_base_get_num_events (base, EVENT_BASE_COUNT_ADDED);
+    printf ("added events: <%d>\n", num);
+
+    num = event_base_get_num_events (base, EVENT_BASE_COUNT_VIRTUAL);
+    printf ("virtul events: <%d>\n", num);  /* 0 */
+
+    event_active (ev, EV_TIMEOUT, 0);
+    num = event_base_get_num_events (base, EVENT_BASE_COUNT_ACTIVE);
+    printf ("active events: <%d>\n", num);
+
+    int cc  = event_base_get_max_events (base, EVENT_BASE_COUNT_ADDED, 10);
+    printf ("max active events: <%d>\n", cc);
+}
+
 int
 main() {
         pipe(pp);
@@ -62,6 +93,8 @@ main() {
 
         assert(pp[1] == event_get_fd(evw));
         assert(event_initialized(evw) == 1);
+
+        test_num_events();
         event_base_dispatch(base);
 
         return 0;

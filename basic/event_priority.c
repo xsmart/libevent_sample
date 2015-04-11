@@ -48,6 +48,8 @@ main()
     event_add(ev2, &tv);
     event_add(ev3, &tv);
 
+    /* 20 */
+    printf ("event_base_get_npriorities()==%d\n",event_base_get_npriorities (base));
     event_base_dispatch(base);
 
     return 0;
