@@ -28,6 +28,8 @@ int main ()
     /* must specify BEV_OPT_THREADSAFE */
     struct event_base *base = event_base_new ();
     cc = bufferevent_pair_new (base, BEV_OPT_THREADSAFE, pair);
+//    bufferevent_base_set (base, pair[0]); /* only socket bufferevent support.*/
+//    bufferevent_base_set (base, pair[1]);
     assert (cc == 0);
 
     /* set callback function */

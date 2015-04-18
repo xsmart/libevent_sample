@@ -7,61 +7,64 @@
 #include <event2/event.h>
 #include <event2/bufferevent.h>
 #include <event2/buffer.h>
-#include <pthread.h>
+
 #define SVRADDR "127.0.0.1"
 #define PORT 8080
 
 FILE *ff;
 struct event_base *p_base;
-struct event_base *thread_base;
-pthread_t thread_id;
+
+/* close the connection self, hope the event happen */
+
+
+void eventcb(struct bufferevent *bev, short events, void *ptr)
+{
+
+}
 
 static void
 buff_input_cb (struct bufferevent *bev,
                void *ctx)
 {
     printf("***in %s\n", __func__);
-    /* goto another base */
-    /* use bufferevent_disable/enable to remove it from main thread. or base_set not work */
-    sleep (10); 
-    bufferevent_disable (bev, EV_WRITE|EV_READ);
-    bufferevent_base_set (thread_base, bev);
-
-    if (pthread_equal (thread_id, pthread_self())) {
-        printf ("run at new thread\n");
-    }
 
     int len = evbuffer_get_length(bufferevent_get_input(bev));
     printf("len=%d\n", len);
     event_base_dump_events(p_base, ff);
 
-    char buff[1024];
-    /* first read data, second make READ event pending */
-    int n = bufferevent_read(bev, buff, 1024);
-    buff[n] = 0;
-    len = evbuffer_get_length(bufferevent_get_input(bev));
-    printf("recv:<%s>, left len=%d\n", buff, len);
-    event_base_dump_events(p_base, ff);
-    
-    bufferevent_enable (bev, EV_WRITE|EV_READ);
+    if (len==20) {
+        char buff[1024];
+        /* first read data, second make READ event pending */
+        bufferevent_read(bev, buff, 1024);
+        len = evbuffer_get_length(bufferevent_get_input(bev));
+        printf("len=%d\n", len);
+        event_base_dump_events(p_base, ff);
+    }
+
     return;
 }
 
-void*
-thread_func (void *arg)
+static void
+buff_ev_cb (struct bufferevent *bev,
+            short events,
+            void *ctx)
 {
-    printf ("new thread begin\n");
-    event_base_loop (thread_base, EVLOOP_NO_EXIT_ON_EMPTY);
-    printf ("new thread end\n");
+
+    printf("in %s\n", __func__);
+
+    if (events & BEV_EVENT_CONNECTED) {
+        printf("***BEV_EVENT_CONNECTED\n");
+    }else if (events & BEV_EVENT_ERROR) {
+        printf("***BEV_EVENT_ERROR\n");
+    }else if (events & BEV_EVENT_EOF) {
+        printf("***BEV_EVENT_EOF\n");
+    }
+    return;
 }
 
 int
 main ()
 {
-
-    thread_base = event_base_new();
-    pthread_create (&thread_id, NULL, thread_func, NULL);
-    
     int sockfd;
     struct bufferevent *p_event;
     struct sockaddr_in addr;
@@ -93,13 +96,20 @@ main ()
         printf("bufferevent_socket_connect ");
         return 1;
     }
+
+    /* EV_WRITE is default enabled, EV_READ is default disabled */
     /* So If we disable READ, evbuffer callback will not be added to base (read and write) */
-    bufferevent_setcb(p_event, buff_input_cb, NULL, NULL, NULL);
-    bufferevent_enable(p_event, EV_WRITE | EV_READ);
+    bufferevent_setcb(p_event, buff_input_cb, NULL, eventcb, p_base);
+    bufferevent_enable(p_event, EV_WRITE);
+
+    /* edge-triggered */
+    /* default read low-water  mark is 0. */
+    /* default read high-water mark is unlimited. */
+
+    /* If the underlying data received over 20, remove the READ event from base */
+    bufferevent_setwatermark(p_event, EV_READ, 10, 20);
 
     event_base_dispatch(p_base);
-    printf ("main thread join\n");
-    
-    pthread_join (thread_id, NULL);
+
     return 0;
 }

@@ -82,6 +82,17 @@ main ()
         readline(STDIN_FILENO, buf, sizeof(buf));
         printf("buf=[%s]\n", buf);
         ret = write(connfd, buf, strlen(buf));
+
+#if 0
+        int n = read (connfd, buf, 1024);
+        if (n==0) {
+            printf ("client close the connection\n");
+        }
+        else if (n>0 ) {
+            buf[n]=0;
+            printf ("read <%s>\n", buf);
+        }
+#endif
     }
 
     return 0;
