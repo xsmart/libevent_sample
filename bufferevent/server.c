@@ -93,6 +93,7 @@ main ()
             buf[n]=0;
             printf ("read <%s>\n", buf);
         }
+        sleep (2);
     }
 #endif
     }
